@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 function Header(props) {
     return (
         <header>
-            <div className="align-center d-flex justify-between">
+            <div className="align-center d-flex">
                 <div className="header-left-side d-flex w100p">
                     <Link to="/">
                         <img src="/img/logo.svg" alt=""/>

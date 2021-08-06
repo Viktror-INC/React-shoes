@@ -119,7 +119,6 @@ header {
   }
 
   input {
-    //background-image: url('');
     color: $grey;
     padding-left: $size45;
     width: 100%;
@@ -355,3 +354,32 @@ header {
   text-align: center;
   margin-top: 50px;
 }
+
+.align-center {
+  justify-content: space-between;
+}
+
+@media only screen and (max-width: 800px)  {
+  .align-center {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .main-content {
+    span {
+      text-align: center;
+    }
+  }
+
+  .header-right-side {
+    margin: 20px auto;
+  }
+
+  .main-content {
+    grid-template-columns: auto;
+  }
+}
+
+
