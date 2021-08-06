@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './Cart.module.scss'
-import axios from "axios";
 
 function Card({name,image,price, onPlus,id, onAddToFavorite, isFavorite }) {
     const [isAdded, setIsAdded] = React.useState(false);

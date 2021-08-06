@@ -35,7 +35,7 @@ function DrawerCart({onClickCart, onRemove, items = []}) {
                     </div>
                     <button>
                         <span>Оформить заказ</span>
-                        <img src='/img/order-arrow.svg'/>
+                        <img alt='order' src='/img/order-arrow.svg'/>
                     </button>
                 </div>
 

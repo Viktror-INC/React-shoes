@@ -1,6 +1,5 @@
 import React from 'react';
 import Card from "../components/Card";
-import styles from "../components/Card/Cart.module.scss";
 
 function Favorite({favoritesItems, onAddToFavorite}) {
     return (
