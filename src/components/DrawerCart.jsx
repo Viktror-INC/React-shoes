@@ -1,19 +1,26 @@
 import React from 'react';
+import AppContext from "../context";
 
-function DrawerCart({onClickCart, onRemove, items = []}) {
+function DrawerCart({onClickCart, onRemove}) {
+    const {addItemInCart,removeItemInCart, cartItems} = React.useContext(AppContext);
     return (
         <div className="drawer-overlay">
             <div className="drawer">
                 <h1>Корзина <button onClick={onClickCart} className="cart-btn"><img src="/img/remove-cart.svg" alt=""/>
                 </button></h1>
                 <ul>
-                    {items.length > 0 ? items.map((obj, index) => {
+                    {cartItems.length > 0 ? cartItems.map((obj, index) => {
                         return (
                             <li key={index}>
                                 <img src={obj.image} alt=""/>
                                 <div className="drawer-item-wrap">
                                     <span className="drawer-name">{obj.name}</span>
-                                    <span className="drawer-price">{obj.price}</span>
+                                    <div className="count-wrap">
+                                        <img onClick={() => addItemInCart(obj)} width={30} height={30} className="btn-cart btn-cart_plus" src="/img/add-cart.svg" alt=""/>
+                                        <span className="drawer-count">{obj.count} шт</span>
+                                        <img onClick={() => removeItemInCart(obj)} className={"btn-cart btn-cart_minus"} src="/img/minus.png" alt=""/>
+                                    </div>
+                                    <span className="drawer-price">Цена: {obj.price} руб</span>
                                 </div>
                                 <button onClick={() => onRemove(obj.id)} className="cart-btn"><img src="/img/remove-cart.svg" alt=""/></button>
                             </li>

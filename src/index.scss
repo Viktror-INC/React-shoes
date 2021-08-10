@@ -222,6 +222,27 @@ header {
   font-size: 14px;
 }
 
+.drawer-count {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  font-width: bold;
+}
+
+.count-wrap {
+  width: 100%;
+  display: flex;
+  margin: 20px auto;
+
+  .btn-cart {
+    content: "";
+    display: block;
+    width: 25px;
+    height: 25px;
+  }
+}
+
+
 .drawer-price {
   font-weight: 700;
   font-size: 15px;

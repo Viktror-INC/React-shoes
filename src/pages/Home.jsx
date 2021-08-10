@@ -1,7 +1,23 @@
 import React from 'react';
 import Card from "../components/Card";
 
-function Home({items, searchText, setSearchText, onChangeSearchInput, onAddToCart, onAddToFavorite}) {
+function Home({items, cartItems, searchText, setSearchText, onChangeSearchInput, onAddToCart, onAddToFavorite, isLoading}) {
+    const renderItems = () => {
+        const filterItems = items.filter((item) => item.name.toLowerCase().includes(searchText.toLowerCase()));
+        return (isLoading ? [...Array(10)] :filterItems)
+            .map((item, index) => {
+                return (
+                    <Card
+                        key={index}
+                        onPlus={(obj) => onAddToCart(obj)}
+                        onAddToFavorite={(obj) => onAddToFavorite(obj)}
+                        isFavorite={false}
+                        isLoading={isLoading}
+                        {...item}
+                    />
+                )
+            }
+        )}
     return (
         <div className="main-content-wrap">
             <div className="main-head">
@@ -15,18 +31,7 @@ function Home({items, searchText, setSearchText, onChangeSearchInput, onAddToCar
                 </div>
             </div>
             <ul className="main-content clear">
-                {items.filter((item) => item.name.toLowerCase().includes(searchText.toLowerCase())).map((item, index) => {
-                        return (
-                            <Card
-                                key={index}
-                                onPlus={(obj) => onAddToCart(obj)}
-                                onAddToFavorite={(obj) => onAddToFavorite(obj)}
-                                isFavorite={false}
-                                {...item}
-                            />
-                        )
-                    }
-                )}
+                {renderItems()}
             </ul>
         </div>
     );
