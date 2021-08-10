@@ -16,9 +16,9 @@ function DrawerCart({onClickCart, onRemove}) {
                                 <div className="drawer-item-wrap">
                                     <span className="drawer-name">{obj.name}</span>
                                     <div className="count-wrap">
-                                        <img onClick={() => addItemInCart(obj)} width={30} height={30} className="btn-cart btn-cart_plus" src="/img/add-cart.svg" alt=""/>
-                                        <span className="drawer-count">{obj.count} шт</span>
                                         <img onClick={() => removeItemInCart(obj)} className={"btn-cart btn-cart_minus"} src="/img/minus.png" alt=""/>
+                                        <span className="drawer-count">{obj.count} шт</span>
+                                        <img onClick={() => addItemInCart(obj)} width={30} height={30} className="btn-cart btn-cart_plus" src="/img/add-cart.svg" alt=""/>
                                     </div>
                                     <span className="drawer-price">Цена: {obj.price} руб</span>
                                 </div>
