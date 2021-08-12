@@ -6,11 +6,26 @@ import axios from "axios";
 function DrawerCart({onClickCart, onRemove}) {
     const {addItemInCart, removeItemInCart, cartItems, setCartItems} = React.useContext(AppContext);
     const [isComplited, setIsComplited] = React.useState(false);
+    const [orderId, setOrderId] = React.useState(null);
+    const [isLoading, setIsLoading] = React.useState(true);
 
-    const onClickOrder = () => {
-        setCartItems([]);
-        setIsComplited(true);
-        axios.post('https://61092eb1d71b6700176397de.mockapi.io/orders',cartItems);
+    const onClickOrder = async() => {
+        try {
+            setIsLoading(true);
+            const {data} = await axios.post('https://61092eb1d71b6700176397de.mockapi.io/orders',{items : cartItems});
+            setOrderId(data.id);
+
+            for (let i=0; i < cartItems.length; i++) {
+                const item = cartItems[i];
+                await axios.delete(`https://61092eb1d71b6700176397de.mockapi.io/cart/` + item.id);
+            }
+
+            setCartItems([]);
+            setIsComplited(true);
+        } catch (error) {
+            alert('Order was not created')
+        }
+        setIsLoading(false);
     }
 
     return (
@@ -63,7 +78,7 @@ function DrawerCart({onClickCart, onRemove}) {
                 ) : (
                     <>
                         { isComplited ?
-                            (<Info btn_text="К товарам" title="Заказ сделан" description="Ваш заказ обрабатывается" image="/img/cart/ordered_cart.jpg"/>)
+                            (<Info btn_text="К товарам" title="Заказ сделан" description={`Ваш заказ №${orderId} обрабатывается`} image="/img/cart/ordered_cart.jpg"/>)
                             :
                             (<Info btn_text="К товарам" title="Корзина пустая" description="Нет товаров в корзине" image="/img/cart/empty_cart.png"/>)
                         }
