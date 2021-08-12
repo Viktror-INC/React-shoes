@@ -263,7 +263,7 @@ header {
   justify-content: center;
   flex-direction: column;
 
-  button {
+  button, .orders_button {
     position: relative;
     padding: 18px 0;
     width: 100%;
@@ -293,6 +293,29 @@ header {
     img {
       transform: translateX(5px);
     }
+  }
+}
+
+.orders_button {
+  position: relative;
+  padding: 18px 0;
+  width: 100%;
+  max-width: 325px;
+  background-color: #9DD458;
+  border-radius: 18px;
+  border: none;
+
+  span {
+    font-weight: 600;
+    font-size: 16px;
+    color: #ffff;
+  }
+
+  img {
+    position: absolute;
+    top: 22px;
+    right: 30px;
+    transition: all 0.2s linear;
   }
 }
 
@@ -370,10 +393,30 @@ header {
   margin: 0 auto;
   font-size: 25px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   width: 100%;
   text-align: center;
   margin-top: 50px;
+
+  .empty_img {
+    width: 100%;
+    max-width: 150px;
+    display: block;
+    margin: 0 auto 40px auto;
+  }
+  button {
+    margin: 0 auto;
+  }
+  span, p {
+    margin: 0 auto 40px auto;
+  }
+
+  .arrow {
+    right: auto;
+    left: 30px;
+    transform: rotate(180deg);
+  }
 }
 
 .align-center {

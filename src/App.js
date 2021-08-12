@@ -54,9 +54,7 @@ function App() {
     const addItemInCart = (obj) => {
         if (cartItems.filter(cartItem => Number(cartItem.id) === Number(obj.id))) {
             obj.count = Number(obj.count) + 1;
-            console.log(obj.id);
             const foundIndex = cartItems.findIndex((item) => item.id === obj.id);
-            console.log(foundIndex);
             if (foundIndex !== -1) {
                 const temp = [...cartItems];
                 temp.splice(foundIndex, 1, obj);
@@ -71,11 +69,9 @@ function App() {
 
         if (cartItems.filter(cartItem => Number(cartItem.id) === Number(obj.id))) {
             if (obj.count <= 1) {
-                console.log('minus');
                 axios.delete(`https://61092eb1d71b6700176397de.mockapi.io/cart/${obj.id}`);
 
                 const foundIndex = cartItems.findIndex((item) => item.id === obj.id);
-                console.log(foundIndex);
                 if (foundIndex !== -1) {
                     const temp = [...cartItems];
                     temp.splice(foundIndex, 1);
@@ -84,7 +80,6 @@ function App() {
             } else {
                 obj.count = Number(obj.count) - 1;
                 const foundIndex = cartItems.findIndex((item) => item.id === obj.id);
-                console.log(foundIndex);
                 if (foundIndex !== -1) {
                     const temp = [...cartItems];
                     temp.splice(foundIndex, 1, obj);
@@ -130,7 +125,7 @@ function App() {
     }
     return (
         <AppContext.Provider
-            value={{items, cartItems, favoritesItems, isItemAdded, onAddToFavorite, addItemInCart, removeItemInCart}}>
+            value={{items,setCartItems, cartItems, favoritesItems, isItemAdded, onAddToFavorite, addItemInCart, removeItemInCart, setCartOpened}}>
             <div className="App">
                 {cartOpened ? <DrawerCart onAddToCart={onAddToCart} onRemove={onRemoveFromCart} items={cartItems}
                                           onClickCart={onClickCart}/> : null}
