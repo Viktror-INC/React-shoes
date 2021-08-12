@@ -10,15 +10,16 @@ function Card({
                   count,
                   onPlus,
                   id,
+                  parent_id,
                   isFavorite,
                   isLoading
               }) {
     const {isItemAdded, onAddToFavorite} = React.useContext(AppContext);
     const [favorite, setFavorite] = React.useState(isFavorite);
-
     /*Add to cart on click plus*/
     const onClickPlus = () => {
-        onPlus({id, name, image, price, count})
+        console.log(parent_id);
+        onPlus({parent_id,id, name, image, price, count})
     }
 
     /*Add to Favorite*/
@@ -54,7 +55,7 @@ function Card({
                             <span className={styles.price_number}>{price} руб.</span>
                         </div>
                         <button onClick={() => onClickPlus()} className={styles.cart_btn}>
-                            <img src={isItemAdded(id) ? '/img/btn-check.svg' : '/img/add-cart.svg'} alt=""/>
+                            <img src={isItemAdded(parent_id) ? '/img/btn-check.svg' : '/img/add-cart.svg'} alt=""/>
                         </button>
                     </div>
                 </>

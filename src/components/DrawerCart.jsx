@@ -9,18 +9,19 @@ function DrawerCart({onClickCart, onRemove}) {
     const [orderId, setOrderId] = React.useState(null);
     const [isLoading, setIsLoading] = React.useState(true);
 
+    const delay = (ms) => new Promise((resolve) => setTimeout(resolve,ms));
+
     const onClickOrder = async() => {
         try {
             setIsLoading(true);
             const {data} = await axios.post('https://61092eb1d71b6700176397de.mockapi.io/orders',{items : cartItems});
             setOrderId(data.id);
-
+            setCartItems([]);
             for (let i=0; i < cartItems.length; i++) {
                 const item = cartItems[i];
                 await axios.delete(`https://61092eb1d71b6700176397de.mockapi.io/cart/` + item.id);
+                await delay(1000);
             }
-
-            setCartItems([]);
             setIsComplited(true);
         } catch (error) {
             alert('Order was not created')

@@ -91,14 +91,14 @@ function App() {
     }
     /*Check if added item => return true or false*/
     const isItemAdded = (id) => {
-        return cartItems.some(cartItem => Number(cartItem.id) === Number(id))
+        return cartItems.some(cartItem => Number(cartItem.parent_id) === Number(id))
     }
 
     /*Remove items from cart*/
 
     const onRemoveFromCart = (id) => {
         axios.delete(`https://61092eb1d71b6700176397de.mockapi.io/cart/${id}`);
-        setCartItems(cartItems => cartItems.filter(item => item.id !== id));
+        setCartItems(cartItem => cartItem.filter(item => item.id !== id));
     }
 
     /*Add item to Favorite*/
