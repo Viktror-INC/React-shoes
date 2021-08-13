@@ -16,6 +16,8 @@ function App() {
     const [isLoading, setIsLoading] = React.useState(true); /*when website rendering we know download items or not*/
     const [prices, setPrices] = React.useState();
 
+    const totalPrice = cartItems.reduce((prevValue, currentValue) => Number(currentValue.price) + Number(prevValue) , 0);
+
 
     const onClickCart = () => {
         setCartOpened(!cartOpened);
@@ -56,7 +58,13 @@ function App() {
     const addItemInCart = (obj) => {
         if (cartItems.filter(cartItem => Number(cartItem.id) === Number(obj.id))) {
             obj.count = Number(obj.count) + 1;
+            /*Add price when plus*/
+            let price = Number(obj.price);
             const foundIndex = cartItems.findIndex((item) => item.id === obj.id);
+            const foundObject = items.filter(item => Number(item.id) === Number(obj.id));
+            const foundItem = (foundObject[0].price);
+            obj.price =Number(price) + Number(foundItem);
+            /**/
             if (foundIndex !== -1) {
                 const temp = [...cartItems];
                 temp.splice(foundIndex, 1, obj);
@@ -81,7 +89,13 @@ function App() {
                 }
             } else {
                 obj.count = Number(obj.count) - 1;
+                /*Add price when plus*/
+                let price = Number(obj.price);
                 const foundIndex = cartItems.findIndex((item) => item.id === obj.id);
+                const foundObject = items.filter(item => Number(item.id) === Number(obj.id));
+                const foundItem = (foundObject[0].price);
+                obj.price =Number(price) - Number(foundItem);
+                /**/
                 if (foundIndex !== -1) {
                     const temp = [...cartItems];
                     temp.splice(foundIndex, 1, obj);
@@ -138,7 +152,8 @@ function App() {
                 removeItemInCart,
                 setCartOpened,
                 prices,
-                setPrices
+                setPrices,
+                totalPrice
             }}>
             <div className="App">
                 {cartOpened ? <DrawerCart onAddToCart={onAddToCart} onRemove={onRemoveFromCart} items={cartItems}

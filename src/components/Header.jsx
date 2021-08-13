@@ -3,8 +3,7 @@ import {Link} from "react-router-dom";
 import AppContext from "../context";
 
 function Header(props) {
-    const {cartItems} = React.useContext(AppContext);
-    const totalPrice = cartItems.reduce((prevValue, currentValue) => Number(currentValue.price) + Number(prevValue) , 0);
+    const {totalPrice} = React.useContext(AppContext);
     return (
         <header>
             <div className="align-center d-flex">

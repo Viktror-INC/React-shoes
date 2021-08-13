@@ -4,12 +4,10 @@ import Info from "./Info";
 import axios from "axios";
 
 function DrawerCart({onClickCart, onRemove}) {
-    const {addItemInCart, removeItemInCart, cartItems, setCartItems} = React.useContext(AppContext);
+    const {addItemInCart, removeItemInCart, cartItems, setCartItems, totalPrice} = React.useContext(AppContext);
     const [isComplited, setIsComplited] = React.useState(false);
     const [orderId, setOrderId] = React.useState(null);
     // const [isLoading, setIsLoading] = React.useState(true);
-
-    const totalPrice = cartItems.reduce((prevValue, currentValue) => Number(currentValue.price) + Number(prevValue) , 0);
 
     const delay = (ms) => new Promise((resolve) => setTimeout(resolve,ms));
 
