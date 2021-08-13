@@ -28,6 +28,7 @@ function DrawerCart({onClickCart, onRemove}) {
         } catch (error) {
             alert('Order was not created')
         }
+        console.log(isLoading);
         setIsLoading(false);
     }
 
