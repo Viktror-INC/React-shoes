@@ -14,6 +14,7 @@ function App() {
     const [favoritesItems, setFavoritesItems] = React.useState([]); /* get and post items which in cart */
     const [searchText, setSearchText] = React.useState(''); /* input search */
     const [isLoading, setIsLoading] = React.useState(true); /*when website rendering we know download items or not*/
+    const [prices, setPrices] = React.useState();
 
 
     const onClickCart = () => {
@@ -40,13 +41,14 @@ function App() {
         tookData();
     }, []);
 
+
     /*Add item to cart*/
-    const onAddToCart = (obj) => {
+    const onAddToCart = async(obj) => {
         if (cartItems.find((item) => Number(item.id) === Number(obj.id))) {
             setCartItems(prevItem => prevItem.filter(objIn => Number(objIn.id) !== Number(obj.id)))
             axios.delete(`https://61092eb1d71b6700176397de.mockapi.io/cart/${obj.id}`);
         } else {
-            axios.post('https://61092eb1d71b6700176397de.mockapi.io/cart', obj);
+            await axios.post('https://61092eb1d71b6700176397de.mockapi.io/cart', obj);
             setCartItems(cartItems => [...cartItems, obj]);
         }
     }
@@ -125,7 +127,19 @@ function App() {
     }
     return (
         <AppContext.Provider
-            value={{items,setCartItems, cartItems, favoritesItems, isItemAdded, onAddToFavorite, addItemInCart, removeItemInCart, setCartOpened}}>
+            value={{
+                items,
+                setCartItems,
+                cartItems,
+                favoritesItems,
+                isItemAdded,
+                onAddToFavorite,
+                addItemInCart,
+                removeItemInCart,
+                setCartOpened,
+                prices,
+                setPrices
+            }}>
             <div className="App">
                 {cartOpened ? <DrawerCart onAddToCart={onAddToCart} onRemove={onRemoveFromCart} items={cartItems}
                                           onClickCart={onClickCart}/> : null}

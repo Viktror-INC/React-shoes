@@ -14,12 +14,12 @@ function Card({
                   isFavorite,
                   isLoading
               }) {
-    const {isItemAdded, onAddToFavorite} = React.useContext(AppContext);
+    const {isItemAdded, onAddToFavorite,prices} = React.useContext(AppContext);
     const [favorite, setFavorite] = React.useState(isFavorite);
     /*Add to cart on click plus*/
     const onClickPlus = () => {
         console.log(parent_id);
-        onPlus({parent_id,id, name, image, price, count})
+        onPlus({parent_id,id, name, image, price, count,prices})
     }
 
     /*Add to Favorite*/

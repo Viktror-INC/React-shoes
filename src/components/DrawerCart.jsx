@@ -9,6 +9,8 @@ function DrawerCart({onClickCart, onRemove}) {
     const [orderId, setOrderId] = React.useState(null);
     const [isLoading, setIsLoading] = React.useState(true);
 
+    const totalPrice = cartItems.reduce((prevValue, currentValue) => Number(currentValue.price) + Number(prevValue) , 0);
+
     const delay = (ms) => new Promise((resolve) => setTimeout(resolve,ms));
 
     const onClickOrder = async() => {
@@ -63,12 +65,12 @@ function DrawerCart({onClickCart, onRemove}) {
                             <div className="total-price-wrap">
                                 <span className="total-title-price">Итого:</span>
                                 <span className="total-line"></span>
-                                <span className="total-price">21 498 руб.</span>
+                                <span className="total-price">{totalPrice} руб.</span>
                             </div>
                             <div className="other-price-wrap">
                                 <span className="total-title-price">Налог 5%:</span>
                                 <span className="total-line"></span>
-                                <span className="total-price">1074 руб.</span>
+                                <span className="total-price">{Math.round(totalPrice / 100 * 5)} руб.</span>
                             </div>
                             <button onClick={onClickOrder}>
                                 <span>Оформить заказ</span>
