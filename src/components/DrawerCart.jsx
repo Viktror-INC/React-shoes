@@ -7,7 +7,7 @@ function DrawerCart({onClickCart, onRemove}) {
     const {addItemInCart, removeItemInCart, cartItems, setCartItems} = React.useContext(AppContext);
     const [isComplited, setIsComplited] = React.useState(false);
     const [orderId, setOrderId] = React.useState(null);
-    const [isLoading, setIsLoading] = React.useState(true);
+    // const [isLoading, setIsLoading] = React.useState(true);
 
     const totalPrice = cartItems.reduce((prevValue, currentValue) => Number(currentValue.price) + Number(prevValue) , 0);
 
@@ -15,7 +15,7 @@ function DrawerCart({onClickCart, onRemove}) {
 
     const onClickOrder = async() => {
         try {
-            setIsLoading(true);
+            // setIsLoading(true);
             const {data} = await axios.post('https://61092eb1d71b6700176397de.mockapi.io/orders',{items : cartItems});
             setOrderId(data.id);
             setCartItems([]);
@@ -28,8 +28,7 @@ function DrawerCart({onClickCart, onRemove}) {
         } catch (error) {
             alert('Order was not created')
         }
-        console.log(isLoading);
-        setIsLoading(false);
+        // setIsLoading(false);
     }
 
     return (
