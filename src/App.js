@@ -10,13 +10,10 @@ import AppContext from './context'
 function App() {
     const [items, setItems] = React.useState([]); /* All items on main page */
     const [cartOpened, setCartOpened] = React.useState(false); /* change open or close cart */
-    const [cartItems, setCartItems] = React.useState([]); /* get and post items which in cart */
+    const [cartItems, setCartItems] = React.useState([]); /* get and post items which in cart< from now we are using Custom Curt hook */
     const [favoritesItems, setFavoritesItems] = React.useState([]); /* get and post items which in cart */
     const [searchText, setSearchText] = React.useState(''); /* input search */
     const [isLoading, setIsLoading] = React.useState(true); /*when website rendering we know download items or not*/
-    const [prices, setPrices] = React.useState();
-
-    const totalPrice = cartItems.reduce((prevValue, currentValue) => Number(currentValue.price) + Number(prevValue) , 0);
 
 
     const onClickCart = () => {
@@ -45,7 +42,7 @@ function App() {
 
 
     /*Add item to cart*/
-    const onAddToCart = async(obj) => {
+    const onAddToCart = async (obj) => {
         if (cartItems.find((item) => Number(item.id) === Number(obj.id))) {
             setCartItems(prevItem => prevItem.filter(objIn => Number(objIn.id) !== Number(obj.id)))
             axios.delete(`https://61092eb1d71b6700176397de.mockapi.io/cart/${obj.id}`);
@@ -63,7 +60,7 @@ function App() {
             const foundIndex = cartItems.findIndex((item) => item.id === obj.id);
             const foundObject = items.filter(item => Number(item.id) === Number(obj.id));
             const foundItem = (foundObject[0].price);
-            obj.price =Number(price) + Number(foundItem);
+            obj.price = Number(price) + Number(foundItem);
             /**/
             if (foundIndex !== -1) {
                 const temp = [...cartItems];
@@ -94,7 +91,7 @@ function App() {
                 const foundIndex = cartItems.findIndex((item) => item.id === obj.id);
                 const foundObject = items.filter(item => Number(item.id) === Number(obj.id));
                 const foundItem = (foundObject[0].price);
-                obj.price =Number(price) - Number(foundItem);
+                obj.price = Number(price) - Number(foundItem);
                 /**/
                 if (foundIndex !== -1) {
                     const temp = [...cartItems];
@@ -151,13 +148,17 @@ function App() {
                 addItemInCart,
                 removeItemInCart,
                 setCartOpened,
-                prices,
-                setPrices,
-                totalPrice
             }}>
             <div className="App">
-                {cartOpened ? <DrawerCart onAddToCart={onAddToCart} onRemove={onRemoveFromCart} items={cartItems}
-                                          onClickCart={onClickCart}/> : null}
+                {cartOpened ?
+                    <DrawerCart
+                        onAddToCart={onAddToCart}
+                        onRemove={onRemoveFromCart}
+                        items={cartItems}
+                        onClickCart={onClickCart}
+                    />
+                    :
+                    null}
                 <div className='wrapper'>
                     <Header onClickCart={onClickCart}/>
                     <div className="container w100p m-auto">

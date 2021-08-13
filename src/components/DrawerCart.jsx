@@ -2,9 +2,11 @@ import React from 'react';
 import AppContext from "../context";
 import Info from "./Info";
 import axios from "axios";
+import {useCart} from "../hooks/useCart";
 
 function DrawerCart({onClickCart, onRemove}) {
-    const {addItemInCart, removeItemInCart, cartItems, setCartItems, totalPrice} = React.useContext(AppContext);
+    const {cartItems, setCartItems, totalPrice} = useCart();
+    const {addItemInCart, removeItemInCart} = React.useContext(AppContext);
     const [isComplited, setIsComplited] = React.useState(false);
     const [orderId, setOrderId] = React.useState(null);
     // const [isLoading, setIsLoading] = React.useState(true);

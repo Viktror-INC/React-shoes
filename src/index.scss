@@ -235,6 +235,7 @@ header {
   margin: 20px auto;
 
   .btn-cart {
+    z-index: 1;
     content: "";
     display: block;
     width: 30px;

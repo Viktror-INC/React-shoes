@@ -1,9 +1,10 @@
 import React from 'react';
 import {Link} from "react-router-dom";
-import AppContext from "../context";
+import {useCart} from "../hooks/useCart";
+
 
 function Header(props) {
-    const {totalPrice} = React.useContext(AppContext);
+    const {totalPrice} = useCart();
     return (
         <header>
             <div className="align-center d-flex">
