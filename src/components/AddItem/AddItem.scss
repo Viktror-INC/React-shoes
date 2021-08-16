@@ -1,0 +1,83 @@
+.add_item_wrap {
+  padding-bottom: 30px;
+
+  h2 {
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+}
+
+.item_wrap {
+  position: relative;
+  width: 100%;
+  padding: 20px;
+  border-radius: 40px;
+  border: 1px solid #F3F3F3;
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  flex-direction: column;
+
+  div {
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+  }
+
+  span {
+    margin: 20px 0;
+  }
+
+  .button_wrap {
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  button {
+    display: flex;
+    max-width: 200px;
+    width: 100%;
+    margin: 10px 0;
+    justify-content: center;
+    height: 40px;
+    align-items: center;
+    border-radius: 10px;
+    border:1px solid #a8a7a7;
+    background-color: inherit;
+    cursor: pointer;
+  }
+}
+
+.image_item {
+
+  .image_item_input {
+    display: block;
+    border: none;
+    margin: 0 auto;
+    visibility: hidden;
+  }
+
+  .add_file {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .add_file img {
+    margin-right: 10px;
+  }
+}
+
+.name_item, .price_item {
+  input{
+    border-radius: 15px;
+    height: 25px;
+    border: 2px solid #c2c1c1;
+  };
+}

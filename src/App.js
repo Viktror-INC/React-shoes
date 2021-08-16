@@ -6,6 +6,8 @@ import {Route} from "react-router";
 import Home from "./pages/Home";
 import Favorite from "./pages/Favorite";
 import AppContext from './context'
+import Orders from "./pages/Orders";
+import AddItem from "./components/AddItem/AddItem";
 
 function App() {
     const [items, setItems] = React.useState([]); /* All items on main page */
@@ -30,14 +32,14 @@ function App() {
             const FavItemsResponse = await axios.get('https://61092eb1d71b6700176397de.mockapi.io/favorite');
             const itemsResponse = await axios.get('https://61092eb1d71b6700176397de.mockapi.io/items');
 
-            setIsLoading(false);
-
             setCartItems(cartItemsResponse.data);
             setFavoritesItems(FavItemsResponse.data);
             setItems(itemsResponse.data);
+            setIsLoading(false);
         }
-
         tookData();
+
+
     }, []);
 
 
@@ -139,6 +141,7 @@ function App() {
     return (
         <AppContext.Provider
             value={{
+                setItems,
                 items,
                 setCartItems,
                 cartItems,
@@ -178,6 +181,10 @@ function App() {
                         <Route exact path="/favorites">
                             <Favorite/>
                         </Route>
+                        <Route exact path="/orders">
+                            <Orders/>
+                        </Route>
+                        <AddItem/>
                     </div>
                 </div>
             </div>
