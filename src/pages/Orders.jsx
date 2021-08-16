@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import Card from "../components/Card";
 import AppContext from "../context";
 import axios from "axios";
