@@ -12,17 +12,23 @@ const AddItem = () => {
 
     const OnAddItem = async (e) => {
         e.preventDefault();
+        if(additems.name !=="" & additems.price !=="" & additems.image !=="") {
+            const newItem = [...items, additems];
+            setItems(newItem);
+            await axios.post('https://61092eb1d71b6700176397de.mockapi.io/items', additems);
 
-        const newItem = [...items, additems];
-        setItems(newItem);
-         await axios.post('https://61092eb1d71b6700176397de.mockapi.io/items', additems);
+            setAdditems({name:"", price:"", image:""});
+            setFile("");
+        }
 
-        setAdditems({name:"", price:"", image:""});
-        setFile("");
+        if (additems.image ==="") {
+            alert('Image not added')
+        }
     }
 
 
     const handleChange = (e) => {
+        e.preventDefault();
         const selectFile = e.target.files[0];
         setFile(selectFile);
         const filePrev = URL.createObjectURL(selectFile);
@@ -35,11 +41,12 @@ const AddItem = () => {
             <form className="item_wrap">
                 <div className="image_item">
                     <input
+                        required
                         onChange={(e) => handleChange(e)}
                         id="img_input"
                         className="image_item_input"
                         type="file"
-                        accept="image/*"
+                        accept="images/*"
                     />
                     {file && <img src={preview} alt={file.name}/>}
                     <label className="add_file" htmlFor="img_input">
@@ -49,11 +56,11 @@ const AddItem = () => {
                 </div>
                 <div className="name_item">
                     <span>Имя товара</span>
-                    <input type="text" value={additems.name} onChange={(e) => setAdditems({...additems, name:e.target.value})}/>
+                    <input required type="text" maxLength="100" value={additems.name} onChange={(e) => setAdditems({...additems, name:e.target.value})}/>
                 </div>
                 <div className="price_item">
                     <span>Цена товара</span>
-                    <input type="text" value={additems.price} onChange={(e) => setAdditems({...additems, price:e.target.value})}/>
+                    <input required type="number" maxLength="100" value={additems.price} onChange={(e) => setAdditems({...additems, price:e.target.value})}/>
                 </div>
                 <div className="button_wrap">
                     <button onClick={(e) => OnAddItem(e)}>Добавить товар</button>
