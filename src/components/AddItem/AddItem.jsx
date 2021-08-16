@@ -15,7 +15,6 @@ const AddItem = () => {
 
         const newItem = [...items, additems];
         setItems(newItem);
-        console.log([...items]);
          await axios.post('https://61092eb1d71b6700176397de.mockapi.io/items', additems);
 
         setAdditems({name:"", price:"", image:""});
@@ -27,7 +26,6 @@ const AddItem = () => {
         const selectFile = e.target.files[0];
         setFile(selectFile);
         const filePrev = URL.createObjectURL(selectFile);
-        console.log(filePrev);
         setPreview(filePrev);
         setAdditems({...additems, image:filePrev})
     }

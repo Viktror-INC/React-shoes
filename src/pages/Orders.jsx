@@ -13,7 +13,6 @@ function Orders() {
             try {
                 const {data} = await axios.get('https://61092eb1d71b6700176397de.mockapi.io/orders');
                 const arrays = (data.reduce((prewObj, currentObj) => [...prewObj, ...currentObj.items],[]));
-                console.log(arrays);
                 setOrderItems(arrays);
                 setIsLoading(false);
             } catch (error) {
@@ -22,6 +21,7 @@ function Orders() {
         }
         tookData();
     },[])
+
     return (
         <div className="main-content-wrap">
             <div className="main-head">
