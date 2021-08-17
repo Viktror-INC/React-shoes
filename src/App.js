@@ -7,7 +7,6 @@ import Home from "./pages/Home";
 import Favorite from "./pages/Favorite";
 import AppContext from './context'
 import Orders from "./pages/Orders";
-import AddItem from "./components/AddItem/AddItem";
 
 function App() {
     const [items, setItems] = React.useState([]); /* All items on main page */
