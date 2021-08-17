@@ -37,6 +37,7 @@ function App() {
             setItems(itemsResponse.data);
             setIsLoading(false);
         }
+
         tookData();
 
 
@@ -50,27 +51,40 @@ function App() {
             axios.delete(`https://61092eb1d71b6700176397de.mockapi.io/cart/${obj.id}`);
         } else {
             await axios.post('https://61092eb1d71b6700176397de.mockapi.io/cart', obj);
-            setCartItems(cartItems => [...cartItems, obj]);
+            const {data} = await axios.get('https://61092eb1d71b6700176397de.mockapi.io/cart');
+            setCartItems(data);
         }
     }
+
+    /*Remove items from cart*/
+    const onRemoveFromCart = (id) => {
+        axios.delete(`https://61092eb1d71b6700176397de.mockapi.io/cart/${id}`);
+        setCartItems(cartItem => cartItem.filter(item => item.id !== id));
+    }
+
     /*Plus item in cart*/
-    const addItemInCart = (obj) => {
-        if (cartItems.filter(cartItem => Number(cartItem.id) === Number(obj.id))) {
-            obj.count = Number(obj.count) + 1;
-            /*Add price when plus*/
-            let price = Number(obj.price);
-            const foundIndex = cartItems.findIndex((item) => item.id === obj.id);
-            const foundObject = items.filter(item => Number(item.id) === Number(obj.id));
-            const foundItem = (foundObject[0].price);
-            obj.price = Number(price) + Number(foundItem);
-            /**/
-            if (foundIndex !== -1) {
-                const temp = [...cartItems];
-                temp.splice(foundIndex, 1, obj);
-                setCartItems(temp);
+    const addItemInCart = async (obj) => {
+        try {
+            if (cartItems.filter(cartItem => Number(cartItem.id) === Number(obj.id))) {
+                obj.count = Number(obj.count) + 1;
+                /*Add price when plus*/
+                let price = Number(obj.price);
+                const foundIndex = cartItems.findIndex((item) => item.id === obj.id);
+                const foundObject = items.filter(item => Number(item.id) === Number(obj.id))
+                const foundItem = (foundObject[0].price);
+                obj.price = Number(price) + Number(foundItem);
+                /**/
+                if (foundIndex !== -1) {
+                    const temp = [...cartItems];
+                    temp.splice(foundIndex, 1, obj);
+                    setCartItems(temp);
+                }
             }
-            axios.put(`https://61092eb1d71b6700176397de.mockapi.io/cart/${obj.id}`, obj);
+            await axios.put(`https://61092eb1d71b6700176397de.mockapi.io/cart/${obj.id}`, obj);
+        } catch (error) {
+            alert("item not plused in cart")
         }
+
     }
 
     /*Minus item in cart*/
@@ -109,13 +123,6 @@ function App() {
         return cartItems.some(cartItem => Number(cartItem.parent_id) === Number(id))
     }
 
-    /*Remove items from cart*/
-
-    const onRemoveFromCart = (id) => {
-        axios.delete(`https://61092eb1d71b6700176397de.mockapi.io/cart/${id}`);
-        setCartItems(cartItem => cartItem.filter(item => item.id !== id));
-    }
-
     /*Add item to Favorite*/
 
     const onAddToFavorite = async (obj) => {
@@ -136,7 +143,6 @@ function App() {
 
     const onChangeSearchInput = (event) => {
         setSearchText(event.target.value)
-        console.log(searchText);
     }
     return (
         <AppContext.Provider
@@ -184,7 +190,6 @@ function App() {
                         <Route exact path="/orders">
                             <Orders/>
                         </Route>
-                        <AddItem/>
                     </div>
                 </div>
             </div>

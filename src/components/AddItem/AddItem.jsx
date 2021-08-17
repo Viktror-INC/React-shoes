@@ -12,17 +12,23 @@ const AddItem = () => {
 
     const OnAddItem = async (e) => {
         e.preventDefault();
-        if(additems.name !=="" & additems.price !=="" & additems.image !=="") {
-            const newItem = [...items, additems];
-            setItems(newItem);
-            await axios.post('https://61092eb1d71b6700176397de.mockapi.io/items', additems);
+        try {
+            if(additems.name !=="" & additems.price !=="" & additems.image !=="") {
+                const newItem = [...items, additems];
+                setItems(newItem);
+                await axios.post('https://61092eb1d71b6700176397de.mockapi.io/items', additems);
+                const {data} = await axios.get('https://61092eb1d71b6700176397de.mockapi.io/items');
+                setItems(data);
 
-            setAdditems({name:"", price:"", image:""});
-            setFile("");
-        }
+                setAdditems({name:"", price:"", image:""});
+                setFile("");
+            }
 
-        if (additems.image ==="") {
-            alert('Image not added')
+            if (additems.image ==="") {
+                alert('Image not added')
+            }
+        } catch (erro) {
+            alert("Error when add item on site")
         }
     }
 

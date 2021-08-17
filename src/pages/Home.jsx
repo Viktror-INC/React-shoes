@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from "../components/Card";
+import AddItem from "../components/AddItem/AddItem";
 
 function Home({items, cartItems, searchText, setSearchText, onChangeSearchInput, onAddToCart, onAddToFavorite, isLoading}) {
     const renderItems = () => {
@@ -33,6 +34,7 @@ function Home({items, cartItems, searchText, setSearchText, onChangeSearchInput,
             <ul className="main-content clear">
                 {renderItems()}
             </ul>
+            <AddItem/>
         </div>
     );
 }
