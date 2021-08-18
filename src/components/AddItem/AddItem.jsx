@@ -27,6 +27,10 @@ const AddItem = () => {
         } catch (error) {
             alert("Error when add item on site")
         }
+
+        if (additems.image ==="") {
+            alert("Image not added")
+        }
     }
 
 /*Preview image and post*/
