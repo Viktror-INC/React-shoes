@@ -6,10 +6,8 @@ import axios from "axios";
 const AddItem = () => {
     const {items, setItems} = React.useContext(AppContext);
     const [additems, setAdditems] = React.useState({name:"", price:"", image:"", count: "1", parent_id: `${Date.now()}`});
-
     const [file, setFile] = React.useState("");
     const [preview, setPreview] = React.useState("");
-    const[resopnse, setResopnse] = React.useState("");
 
     const OnAddItem = async (e) => {
         e.preventDefault();
