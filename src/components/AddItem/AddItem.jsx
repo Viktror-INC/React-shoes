@@ -9,10 +9,12 @@ const AddItem = () => {
 
     const [file, setFile] = React.useState("");
     const [preview, setPreview] = React.useState("");
+    const[resopnse, setResopnse] = React.useState("");
 
     const OnAddItem = async (e) => {
         e.preventDefault();
         try {
+            /*Add new items to data*/
             if(additems.name !=="" & additems.price !=="" & additems.image !=="") {
                 const newItem = [...items, additems];
                 setItems(newItem);
@@ -24,23 +26,29 @@ const AddItem = () => {
                 setFile("");
             }
 
-            if (additems.image ==="") {
-                alert('Image not added')
-            }
-        } catch (erro) {
+        } catch (error) {
             alert("Error when add item on site")
         }
     }
 
-
-    const handleChange = (e) => {
+/*Preview image and post*/
+    const handleChange = async(e) => {
+        /*Add image from input from local state*/
         e.preventDefault();
         const selectFile = e.target.files[0];
         setFile(selectFile);
         const filePrev = URL.createObjectURL(selectFile);
         setPreview(filePrev);
-        setAdditems({...additems, image:filePrev})
+
+        /*Upload this image*/
+        const data = new FormData(); /*careate new form*/
+        data.append('file',selectFile); /* add to end form this 2 things*/
+        data.append('upload_preset', 'sneakers_img'); /* add to end form this 2 things, which preset we want, and name data base img*/
+        const res = await axios.post("https://api.cloudinary.com/v1_1/namofmetric/image/upload",data);
+        const ingUrl = await res.data.url;
+        setAdditems({...additems, image:ingUrl});
     }
+
     return (
         <div className="add_item_wrap">
             <h2>Добавить товар на сайт</h2>
