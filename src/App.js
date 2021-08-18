@@ -66,13 +66,13 @@ function App() {
         try {
             if (cartItems.filter(cartItem => Number(cartItem.id) === Number(obj.id))) {
                 obj.count = Number(obj.count) + 1;
+
                 /*Add price when plus*/
                 let price = Number(obj.price);
-                const foundIndex = cartItems.findIndex((item) => item.id === obj.id);
-                const foundObject = items.filter(item => Number(item.id) === Number(obj.id))
+                const foundIndex = cartItems.findIndex((item) => item.parent_id === obj.parent_id);
+                const foundObject = items.filter(item => Number(item.parent_id) === Number(obj.parent_id))
                 const foundItem = (foundObject[0].price);
                 obj.price = Number(price) + Number(foundItem);
-                /**/
                 if (foundIndex !== -1) {
                     const temp = [...cartItems];
                     temp.splice(foundIndex, 1, obj);

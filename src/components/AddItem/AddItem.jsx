@@ -14,8 +14,8 @@ const AddItem = () => {
         try {
             /*Add new items to data*/
             if(additems.name !=="" & additems.price !=="" & additems.image !=="") {
-                const newItem = [...items, additems];
-                setItems(newItem);
+                const newItems = [...items, additems];
+                setItems(newItems);
                 await axios.post('https://61092eb1d71b6700176397de.mockapi.io/items', additems);
                 const {data} = await axios.get('https://61092eb1d71b6700176397de.mockapi.io/items');
                 setItems(data);
