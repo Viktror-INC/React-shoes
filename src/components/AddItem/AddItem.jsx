@@ -58,7 +58,6 @@ const AddItem = () => {
                         id="img_input"
                         className="image_item_input"
                         type="file"
-                        accept="images/*"
                     />
                     {file && <img src={preview} alt={file.name}/>}
                     <label className="add_file" htmlFor="img_input">
